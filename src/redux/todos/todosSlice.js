@@ -23,21 +23,19 @@ const todoSlice = createSlice({
   },
   reducers: {
     addNewItem: (state, action) => {
-      state.items.push(
-        action.payload
-      );
+      state.items.push(action.payload);
     },
-    toogle: (state,action) =>{
+    toogle: (state, action) => {
       const id = action.payload;
-      const item = state.items.find(item => item.id === id)
-      item.completed = !item.completed
+      const item = state.items.find((item) => item.id === id);
+      item.completed = !item.completed;
     },
-    destroy : (state,action) => {
+    destroy: (state, action) => {
       const id = action.payload;
-      const filtered = state.items.filter(item => item.id !== id)
-      items 
-    }
+      const filtered = state.items.filter((item) => item.id !== id);
+      state.items = filtered;
+    },
   },
 });
-export const {addNewItem, toogle,destroy} =todoSlice.actions;
+export const { addNewItem, toogle, destroy } = todoSlice.actions;
 export default todoSlice.reducer;

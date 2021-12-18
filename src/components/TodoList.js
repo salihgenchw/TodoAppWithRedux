@@ -6,17 +6,28 @@ import { toogle, destroy } from "../redux/todos/todosSlice";
 const TodoList = () => {
   const items = useSelector((state) => state.todo.items);
   const dispatch = useDispatch();
+  const activeFilter = useSelector((state) => state.todo.activeFilter);
 
+  let filtered = [];
   const handleDestroy = (id) => {
     if (window.confirm("Are u sure?")) {
       dispatch(destroy(id));
     }
   };
 
+  filtered = items;
+  if (activeFilter !== "all") {
+    filtered = items.filter((todo) =>
+      activeFilter === "active"
+        ? todo.completed === false
+        : todo.completed === true
+    );
+  }
+
   return (
     <div>
       <ul className="todo-list">
-        {items.map((item) => (
+        {filtered.map((item) => (
           <li key={item.id} className={item.completed ? "completed" : ""}>
             <div className="view">
               <input

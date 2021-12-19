@@ -4,7 +4,7 @@ import { changeActiveFilter,clearCompleted } from "../redux/todos/todosSlice";
 
 const ContentFooter = () => {
   const dispatch = useDispatch();
-  const items = useSelector((state) => state.todos.items);
+  const items = useSelector(state => state.todos.items);
   const itemLeft = items.filter((item) => !item.completed).length;
 
   const activeFilter = useSelector((state) => state.todos.activeFilter);
